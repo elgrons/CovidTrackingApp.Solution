@@ -12,5 +12,12 @@ namespace CovidTracking.Models
 			RestResponse response = await client.GetAsync(request);
 			return response.Content;
 		}
-	}
+        public static async Task<string> GetCasesByDate(string date)
+        {
+            RestClient client = new RestClient("https://api.covidtracking.com/");
+            RestRequest request = new RestRequest($"v1/us/{date}.json", Method.Get);
+            var response = await client.ExecuteAsync(request);
+            return response.Content;
+        }
+    }
 }
