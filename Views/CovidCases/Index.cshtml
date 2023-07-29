@@ -1,0 +1,84 @@
+﻿@{
+    ViewData["Title"] = "CovidCases";
+}
+@model List<CovidTracking.Models.CovidCase>
+
+<div class="text-center">
+	<h5 class="display-4">Find data below related to COVID-19 cases for different U.S. states.</h5>
+	<h6 class="display-4">Feel free to filter the data by a specific date or state.</h6>
+
+	<div id="grid"></div>
+    <script>
+        var data = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
+
+        $(document).ready(function () {
+            $("#grid").kendoGrid({
+                dataSource: {
+                    data: data,
+                    pageSize: 20,
+                    schema: {
+                        model: {
+                            fields: {
+                                State: { type: "string" },
+                                date: {
+                                    type: "date",
+                                    parse: function (value) {
+                                        var dateString = String(value);
+                                        var year = dateString.substring(0, 4);
+                                        var month = dateString.substring(4, 6);
+                                        var day = dateString.substring(6, 8);
+                                        return new Date(year, month - 1, day);
+                                    }
+                                },
+                                Positive: { type: "number" },
+                                Negative: { type: "number" },
+                                TotalTestResults: { type: "number" },
+                                HospitalizedCurrently: { type: "number" }
+                            }
+                        }
+                    }
+                },
+                height: 550,
+                groupable: true,
+                sortable: true,
+                pageable: {
+                    refresh: true,
+                    pageSizes: true,
+                    buttonCount: 5
+                },
+                columns: [{
+                    field: "state",
+                    title: "State",
+                    width: 240
+                },
+                {
+                    field: "date",
+                    title: "Date",
+                    width: 240,
+                    format: "{0:yyyy-MM-dd}"
+                },
+                {
+                    field: "positive",
+                    title: "Positive Cases",
+                    width: 240
+                },
+                {
+                    field: "negative",
+                    title: "Negative Cases",
+                    width: 240
+                },
+                {
+                    field: "totalTestResults",
+                    title: "Total Test Results",
+                    width: 240
+                },
+                {
+                    field: "hospitalizedCurrently",
+                    title: "Current Hospitalization Total",
+                    width: 240
+                }]
+            });
+        });
+    </script>
+
+</div>
