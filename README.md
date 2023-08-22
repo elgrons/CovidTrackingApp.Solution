@@ -25,7 +25,6 @@ in Descending Order.
 * _Clone this repo down from GitHub https://github.com/elgrons/CovidTrackingApp.Solution_
 * _Once the project is open, build it by going to the "Build" menu at the top of Visual Studio, then click on "Build Solution". You should see a "Build succeeded" message in the "Output" window at the bottom of Visual Studio._
 * _Run the application by pressing the "IIS Express" button located on the toolbar at the top of Visual Studio, or by going to the "Debug" menu and clicking on "Start Debugging".A new browser window should open with your running application. By default, .NET Core applications run on `http://localhost:5000` or `https://localhost:5001`_
-* _Visit the site directly: https://covidtrackingapp.azurewebsites.net/_
 
 ## Known Bugs
 
